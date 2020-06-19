@@ -1,18 +1,25 @@
-stages:
-- name: Build
-  steps:
-  - runScriptConfig:
-      image: maven:3-openjdk-8
-      shellScript: mvn package -DskipTests
-- name: Build Docker with DIND
-  steps:
-  - publishImageConfig:
-      dockerfilePath: ./Dockerfile
-      buildContext: .
-      tag: mod-pubsub:${CICD_EXECUTION_SEQUENCE}
-- name: Deploy
-  steps:
-  - applyYamlConfig:
-      path: ./deployment.yaml
-timeout: 60
-notification: {}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mod-pubsub
+  name: mod-pubsub
+  namespace: folijet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mod-pubsub
+  template:
+    metadata:
+      labels:
+        app: mod-pubsub
+    spec:
+      containers:
+      - image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+        name: mod-pubsub
+        ports:
+        - containerPort: 8081
+          protocol: TCP
+      imagePullSecrets:
+      - name: pipeline-docker-registry

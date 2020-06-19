@@ -1,10 +1,22 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mod-pubsub
+spec:
+  selector:
+    app: mod-pubsub
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: mod-pubsub
   labels:
     app: mod-pubsub
-  name: mod-pubsub
-  namespace: folijet
 spec:
   replicas: 1
   selector:
@@ -15,11 +27,10 @@ spec:
       labels:
         app: mod-pubsub
     spec:
-      containers:
-      - image: mod-pubsub:${CICD_EXECUTION_SEQUENCE}
-        name: mod-pubsub
-        ports:
-        - containerPort: 8081
-          protocol: TCP
       imagePullSecrets:
       - name: pipeline-docker-registry
+      containers:
+      - name: mod-pubsub
+        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+        ports:
+        - containerPort: 8081

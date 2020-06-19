@@ -16,7 +16,7 @@ spec:
         app: mod-pubsub
     spec:
       containers:
-      - image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+      - image: mod-pubsub:${CICD_EXECUTION_SEQUENCE}
         name: mod-pubsub
         ports:
         - containerPort: 8081

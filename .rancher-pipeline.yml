@@ -21,7 +21,6 @@ stages:
       answers:
         image.repository: celticmask/mod-pubsub
         image.tag: ${CICD_EXECUTION_SEQUENCE}
-      name: mod-pub-sub
       targetNamespace: folijet
 timeout: 60
 notification: {}

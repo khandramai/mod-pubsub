@@ -15,6 +15,9 @@ stages:
   - applyAppConfig:
       catalogTemplate: p-mf42h:folijet-helmcharts-mod-pubsub
       version: 0.1.0
+      answers:
+        image.repository: mod-pubsub-dev1
+        image.tag: ${CICD_EXECUTION_SEQUENCE}
       name: mod-pubsub-dev1
       targetNamespace: folijet
 timeout: 60

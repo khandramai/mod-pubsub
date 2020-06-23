@@ -3,7 +3,9 @@ stages:
   steps:
   - runScriptConfig:
       image: maven:3-openjdk-8
-      shellScript: sleep 1;
+      shellScript: |-
+        mkdir target;
+        touch target/mod-pubsub-server-fat.jar;
 - name: Build Docker with DIND
   steps:
   - publishImageConfig:

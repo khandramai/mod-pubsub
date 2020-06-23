@@ -9,14 +9,14 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: mod-pubsub:${CICD_EXECUTION_SEQUENCE}
+      tag: mod-pubsub-dev1:${CICD_EXECUTION_SEQUENCE}
 - name: Deploy
   steps:
   - applyAppConfig:
       catalogTemplate: p-mf42h:folijet-helmcharts-mod-pubsub
       version: 0.1.0
       answers:
-        image.repository: ${CICD_IMAGE}
+        image.repository: mod-pubsub-dev1
         image.tag: ${CICD_EXECUTION_SEQUENCE}
       name: mod-pubsub-dev1
       targetNamespace: folijet

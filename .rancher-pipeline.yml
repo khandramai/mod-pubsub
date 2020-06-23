@@ -11,6 +11,7 @@ stages:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: celticmask/mod-pubsub:${CICD_EXECUTION_SEQUENCE}
+      pushRemote: true
       registry: docker.io
 - name: Deploy
   steps:

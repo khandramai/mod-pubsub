@@ -12,7 +12,11 @@ stages:
       buildContext: .
       tag: celticmask/mod-pubsub:${CICD_EXECUTION_SEQUENCE}
       pushRemote: true
+<<<<<<< HEAD
       registry: index.docker.io
+=======
+      registry: registry.hub.docker.com
+>>>>>>> 5799a0a55b3d88febe2e1bc1c9da2ad1df192ff4
 - name: Deploy
   steps:
   - applyAppConfig:

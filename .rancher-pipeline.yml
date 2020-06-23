@@ -12,7 +12,10 @@ stages:
       tag: mod-pubsub:${CICD_EXECUTION_SEQUENCE}
 - name: Deploy
   steps:
-  - applyYamlConfig:
-      path: ./deployment.yaml
+  - applyAppConfig:
+      catalogTemplate: p-mf42h:folijet-helmcharts-mod-pubsub
+      version: 0.1.0
+      name: mod-pubsub-dev1
+      targetNamespace: folijet
 timeout: 60
 notification: {}

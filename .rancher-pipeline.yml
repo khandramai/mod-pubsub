@@ -10,7 +10,6 @@ stages:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: mod-pubsub:${CICD_EXECUTION_SEQUENCE}
-      pushRemote: true
       registry: 127.0.0.1:34524
 - name: Deploy
   steps:
@@ -18,7 +17,7 @@ stages:
       catalogTemplate: p-mf42h:folijet-helmcharts-mod-pubsub
       version: 0.1.0
       answers:
-        image.repository: registry.ci.folio.org:5000/mod-pubsub
+        image.repository: mod-pubsub
         image.tag: ${CICD_EXECUTION_SEQUENCE}
       name: mod-pubsub
       targetNamespace: folijet

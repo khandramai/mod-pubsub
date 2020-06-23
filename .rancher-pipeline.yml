@@ -11,8 +11,6 @@ stages:
       buildContext: .
       tag: mod-pubsub:${CICD_EXECUTION_SEQUENCE}
       registry: 127.0.0.1:34524
-- name: Deploy
-  steps:
   - applyAppConfig:
       catalogTemplate: p-mf42h:folijet-helmcharts-mod-pubsub
       version: 0.1.0

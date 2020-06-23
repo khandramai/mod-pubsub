@@ -16,7 +16,7 @@ stages:
       catalogTemplate: p-mf42h:folijet-helmcharts-mod-pubsub
       version: 0.1.0
       answers:
-        image.repository: mod-pubsub-dev1
+        image.repository: ${CICD_IMAGE}
         image.tag: ${CICD_EXECUTION_SEQUENCE}
       name: mod-pubsub-dev1
       targetNamespace: folijet

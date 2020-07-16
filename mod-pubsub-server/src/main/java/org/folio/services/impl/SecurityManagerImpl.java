@@ -68,6 +68,11 @@ public class SecurityManagerImpl implements SecurityManager {
   public Future<Boolean> loginPubSubUser(OkapiConnectionParams params) {
     params.setToken(EMPTY);
 
+    String token = cache.getToken(params.getTenantId());
+    if (!StringUtils.isEmpty(token)) {
+      return Future.succeededFuture(true);
+    }
+
     return pubSubUserDao.getPubSubUserCredentials(params.getTenantId())
       .compose(userCredentials -> doRequest(userCredentials.encode(), LOGIN_URL, HttpMethod.POST, params))
       .compose(response -> {

@@ -9,18 +9,29 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: docker.dev.folio.org/mod-pubsub:folijet-latest
+      tag: docker.dev.folio.org/mod-pubsub:${PROJECT_NAME}-latest
       pushRemote: true
       registry: docker.dev.folio.org
+    envFrom:
+      - sourceName: project-config
+        sourceKey: PROJECT_NAME
+        targetKey: PROJECT_NAME
 - name: Deploy
   steps:
   - applyAppConfig:
-      catalogTemplate: p-mf42h:folijet-helmcharts-mod-pubsub
-      version: 0.1.9
+      catalogTemplate: ${PROJECT_ID}:${PROJECT_NAME}-helmcharts-mod-pubsub
+      version: 0.1.16
       answers:
         image.repository: docker.dev.folio.org/mod-pubsub
-        image.tag: folijet-latest
-      targetNamespace: folijet
+        image.tag: ${PROJECT_NAME}-latest
+      targetNamespace: ${PROJECT_NAME}
       name: mod-pubsub
+    envFrom:
+      - sourceName: project-config
+        sourceKey: PROJECT_NAME
+        targetKey: PROJECT_NAME
+      - sourceName: project-config
+        sourceKey: PROJECT_ID
+        targetKey: PROJECT_ID
 timeout: 60
 notification: {}

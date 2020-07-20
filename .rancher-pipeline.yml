@@ -12,10 +12,8 @@ stages:
       tag: docker.dev.folio.org/mod-pubsub:${PROJECT_NAME}-latest
       pushRemote: true
       registry: docker.dev.folio.org
-    envFrom:
-      - sourceName: project-config
-        sourceKey: PROJECT_NAME
-        targetKey: PROJECT_NAME
+    env:
+      PROJECT_NAME:
 - name: Deploy
   steps:
   - applyAppConfig:
@@ -26,12 +24,8 @@ stages:
         image.tag: ${PROJECT_NAME}-latest
       targetNamespace: ${PROJECT_NAME}
       name: mod-pubsub
-    envFrom:
-      - sourceName: project-config
-        sourceKey: PROJECT_NAME
-        targetKey: PROJECT_NAME
-      - sourceName: project-config
-        sourceKey: PROJECT_ID
-        targetKey: PROJECT_ID
+    env:
+      PROJECT_NAME:
+      PROJECT_ID:  
 timeout: 60
 notification: {}
